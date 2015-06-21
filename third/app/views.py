@@ -94,11 +94,10 @@ def handle_data(request):
                 pass
             else:
                 lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
-    show_result()
+    return show_result()
 
 
 def show_result(weibo_found=False, douban_found=False, qzone_found=False):
-    global login_db_id
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
         weibo_found = True
