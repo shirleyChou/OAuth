@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from urllib import urlencode
+from urllib import urlencode, quote
 import urllib2
 import json
 # from functools import wraps
@@ -26,14 +26,14 @@ class OAuth2(object):
 
     @property
     def authorize_url(self):
-    	"""return authorize url using for user who login to social website"""
-    	""" use in the template """
+        """return authorize url using for user who login to social website"""
+        """ use in the template """
         url = "%s?client_id=%s&response_type=code&redirect_uri=%s" %(
             self.login_url, self.client_id, quote(self.redirect_uri)
-    	)
+        )
 
         if getattr(self, 'scope', None):
-        	url = '%s&scope=%s' %(url, '+'.join(self.scope))
+            url = '%s&scope=%s' %(url, '+'.join(self.scope))
 
         return url
 
@@ -89,20 +89,20 @@ class OAuth2(object):
 
     def parse_token(self, response):
         """parse data included access_token and user information"""
-    	raise NotImplementedError()
+        raise NotImplementedError()
 
     def build_api_url(self, url):
-    	raise NotImplementedError()
+        raise NotImplementedError()
 
     def build_api_data(self, **kwargs):
         raise NotImplementedError()
 
     def api_call_get(self, url=None, **kwargs):
-    	url = self.build_api_url(url)
-    	data = self.build_api_data(**kwargs)
-    	return self.http_get(url, data)
+        url = self.build_api_url(url)
+        data = self.build_api_data(**kwargs)
+        return self.http_get(url, data)
 
     def api_call_post(self, url=None, **kwargs):
-    	url = self.build_api_url(url)
+        url = self.build_api_url(url)
         data = self.build_api_data(**kwargs)
         return self.http_post(url, data)

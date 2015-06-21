@@ -13,31 +13,34 @@ class WeiBo(OAuth2):
         # self.login_url = 'https://api.weibo.com/oauth2/authorize'
         self.client_id = '1944801504'
         self.client_secret = '59090e7bcfcb45744eb1467b1af56b16'
-        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com'
+        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com/account/'
         self.access_token_url = 'https://api.weibo.com/oauth2/access_token'
         self.access_token = None
         self.expires_in = None
         self.uid = None
         self.name = None
 
-
+    @property
+    def authorize_url(self):
+        url = super(WeiBo, self).authorize_url
+        return '%s&state=weibo' % url
 
     def build_api_url(self, url):
-    	return url
+        return url
 
     def build_api_data(self, **kwargs):
-    	data = {'access_token': self.access_token}
-    	data.update(kwargs)
-    	return data
+        data = {'access_token': self.access_token}
+        data.update(kwargs)
+        return data
 
     def parse_token(self, res):
-    	self.access_token = res['access_token']
+        self.access_token = res['access_token']
         self.expires_in = res['expires_in']
         # self.remind_in = res['remind_in']
         self.uid = res['uid']
 
         res = self.api_all_get(
-        	'https://api.weibo.com/2/users/show.json',
+            'https://api.weibo.com/2/users/show.json',
             uid=self.uid)
 
         self.name = res['name']

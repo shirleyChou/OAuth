@@ -19,7 +19,7 @@ class Qzone(OAuth2):
         # self.login_url = 'https://graph.qq.com/oauth2.0/authorize'
         self.client_id = '101223323'
         self.client_secret = '94be55c133e44072ab0a2b16860e183f'
-        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com'
+        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com/account/'
         self.access_token_url = 'https://graph.qq.com/oauth2.0/token'
         self.openid_url = 'https://graph.qq.com/oauth2.0/me'
         self.access_token = None
@@ -30,7 +30,7 @@ class Qzone(OAuth2):
     @property
     def authorize_url(self):
         url = super(Qzone, self).authorize_url
-        return '%s&state=test' % url
+        return '%s&state=qzone&which=Login&display=pc' % url
 
     def get_access_token(self, code):
         super(Qzone, self).get_access_token(code, method='GET', parse=False)
