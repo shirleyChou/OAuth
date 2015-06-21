@@ -75,6 +75,3 @@ class Qzone(OAuth2):
 
         # self.avatar = res['figureurl_qq_1']
         # self.avatar_large = res['figureurl_qq_2']
-
-q = Qzone()
-print q.get_access_token(code='BF64325E52AE2214769983A691390DBF')
