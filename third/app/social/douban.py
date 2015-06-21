@@ -12,8 +12,8 @@ class DouBan(OAuth2):
 
     def __init__(self):
         # self.login_url = 'https://www.douban.com/service/auth2/auth'
-        self.client_id = '0e096bed1b6b45b82a1c43c75241d128'
-        self.client_secret = 'a6e8f9dd46e75dde'
+        self.client_id = '0e6954be9322f5f82b3bfe3bb968e1e8'
+        self.client_secret = 'e1264c6c86c9ccab'
         self.redirect_uri = 'https://stark-earth-8812.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'

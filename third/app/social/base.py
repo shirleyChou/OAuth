@@ -8,8 +8,6 @@ import json
 
 
 def _http_error_handler(func):
-    """ handle error msg"""
-    """!!!!!!!!!!!!!!remain to write"""
     pass
 
 
