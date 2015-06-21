@@ -74,7 +74,7 @@ class OAuth2(object):
         	response = self.http_post(self.access_token_url, data, parse=True)
         else:
         	response = self.http_get(self.access_token_url, data, parse=True)
-        parse_token(response)
+        self.parse_token(response)
 
 
     def parse_token(self, response):
