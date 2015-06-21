@@ -4,7 +4,7 @@
 import re
 import json
 
-from .base import OAuth2
+from base import OAuth2
 
 QQ_OPENID_PATTERN = re.compile('\{.+\}')
 
@@ -34,7 +34,6 @@ class Qzone(OAuth2):
 
     def get_access_token(self, code):
         super(Qzone, self).get_access_token(code, method='GET', parse=False)
-
 
     def build_api_url(self, url):
         return url
@@ -76,3 +75,6 @@ class Qzone(OAuth2):
 
         # self.avatar = res['figureurl_qq_1']
         # self.avatar_large = res['figureurl_qq_2']
+
+q = Qzone()
+print q.get_access_token(code='BF64325E52AE2214769983A691390DBF')

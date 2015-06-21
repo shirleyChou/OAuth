@@ -55,7 +55,7 @@ class OAuth2(object):
         self.http_add_header(req)
         data = urllib2.urlopen(req).read()
         if parse:
-            return json.loads(data)     # change to json
+            return json.loads(data)
         return data
 
     def get_access_token(self, code, method="POST", parse=True):
@@ -63,28 +63,19 @@ class OAuth2(object):
         redirect_uri with authorization_code(code='9b73a4248')
         """
         data = {
-            'code': code,  #授权码
+            'code': code, 
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'redirect_uri': self.redirect_uri,
-            'grant_type': 'authorization_code' #必须是这个值
+            'grant_type': 'authorization_code'
         }
 
         if method == 'POST':
         	response = self.http_post(self.access_token_url, data, parse=True)
         else:
         	response = self.http_get(self.access_token_url, data, parse=True)
-        """
-        response = (in douban)
-        {
-          "access_token":"a14afef0f66fcffce3e0fcd2e34f6ff4",
-          "expires_in":3920,
-          "refresh_token":"5d633d136b6d56a41829b73a424803ec",
-          "douban_user_id":"1221"
-        }
-        """
-        self.parse_token(response)
-        # return response
+        parse_token(response)
+
 
     def parse_token(self, response):
         """parse data included access_token and user information"""

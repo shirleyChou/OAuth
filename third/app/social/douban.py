@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from .base import OAuth2
+from base import OAuth2
 
 """
 http://developers.douban.com/wiki/?title=oauth2
