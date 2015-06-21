@@ -39,7 +39,7 @@ class WeiBo(OAuth2):
         # self.remind_in = res['remind_in']
         self.uid = res['uid']
 
-        res = self.api_all_get(
+        res = self.api_call_get(
             'https://api.weibo.com/2/users/show.json',
             uid=self.uid)
 
