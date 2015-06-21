@@ -79,7 +79,7 @@ def handle_data(request):
             if lst and lst[0].id != login_db_id:
                 pass
             else:
-                lo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
+                lst.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
