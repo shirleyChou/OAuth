@@ -71,9 +71,9 @@ class OAuth2(object):
         }
 
         if method == 'POST':
-        	response = self.http_post(self.access_token_url, data, parse=True)
+        	response = self.http_post(self.access_token_url, data, parse=parse)
         else:
-        	response = self.http_get(self.access_token_url, data, parse=True)
+        	response = self.http_get(self.access_token_url, data, parse=parse)
         self.parse_token(response)
 
 
