@@ -13,7 +13,7 @@ class WeiBo(OAuth2):
         # self.login_url = 'https://api.weibo.com/oauth2/authorize'
         self.client_id = '1944801504'
         self.client_secret = '59090e7bcfcb45744eb1467b1af56b16'
-        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com/account/'
+        self.redirect_uri = 'http://afternoon-wildwood-3313.herokuapp.com/account/'
         self.access_token_url = 'https://api.weibo.com/oauth2/access_token'
         self.access_token = None
         self.expires_in = None

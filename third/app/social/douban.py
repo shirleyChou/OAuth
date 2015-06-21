@@ -5,8 +5,6 @@ from .base import OAuth2
 
 """
 http://developers.douban.com/wiki/?title=oauth2
-
-authorize_url --> return code --> using code to get access_token
 """
 
 class DouBan(OAuth2):
@@ -16,7 +14,7 @@ class DouBan(OAuth2):
         # self.login_url = 'https://www.douban.com/service/auth2/auth'
         self.client_id = '0e096bed1b6b45b82a1c43c75241d128'
         self.client_secret = 'a6e8f9dd46e75dde'
-        self.redirect_uri = 'http://stormy-anchorage-4382.herokuapp.com/account/'
+        self.redirect_uri = 'http://afternoon-wildwood-3313.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'
         self.uid = None
