@@ -140,4 +140,4 @@ def logout(request):
     # if 'blog_user' in request.session:
     #     del request.session['blog_user']
     login_db_id = None
-    return render_to_response('home.html')
+    return HttpResponseRedirect('/')
