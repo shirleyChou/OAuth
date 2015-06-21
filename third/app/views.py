@@ -94,7 +94,7 @@ def handle_data(request):
                 pass
             else:
                 lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
-    show_result()
+    self.show_result()
     # return render_to_response(
     #     'index.html', {'weibo_found': weibo_found,
     #                    'douban_found': douban_found,
