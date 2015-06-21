@@ -14,7 +14,7 @@ class DouBan(OAuth2):
         # self.login_url = 'https://www.douban.com/service/auth2/auth'
         self.client_id = '0e096bed1b6b45b82a1c43c75241d128'
         self.client_secret = 'a6e8f9dd46e75dde'
-        self.redirect_uri = 'http://afternoon-wildwood-3313.herokuapp.com/account/'
+        self.redirect_uri = 'https://stark-earth-8812.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'
         self.uid = None
