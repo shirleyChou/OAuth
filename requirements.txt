@@ -1,6 +1,5 @@
 Django==1.8.2
 argparse==1.2.1
-bottle==0.12.8
 dj-database-url==0.3.0
 dj-static==0.0.6
 django-toolbelt==0.0.1

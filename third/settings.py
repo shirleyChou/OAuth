@@ -18,7 +18,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'third.app.login',
+    'third.app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,8 +59,12 @@ WSGI_APPLICATION = 'third.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'taskbuster_db',
+        'USER': 'appleyi13',
+        'PASSWORD': '123456',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -81,8 +85,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROD_DIR, 'static'),
 )
-
-
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url

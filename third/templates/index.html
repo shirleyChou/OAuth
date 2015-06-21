@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>我的Profile</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	</head>
+	<body>
+<!-- Header -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-toggle"></span>
+      </button>
+      <a class="navbar-brand">我的Profile</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Logout</a></li>
+        <!-- <li class="dropdown">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+            <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+          <ul id="g-account-menu" class="dropdown-menu" role="menu">
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+          </ul>
+        </li> -->
+      </ul>
+    </div>
+  </div><!-- /container -->
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container">
+  
+  <!-- upper section -->
+  <div class="row">
+    <div class="col-sm-12"> 
+       <h3>绑定账号</h3>     
+       <hr>
+      
+	   <div class="row">
+            <!-- center left-->	
+         	<div class="col-lg-7">
+			  
+              <div class="panel panel-default">
+                  <div class="panel-heading"><h4><strong>登陆状态</strong></h4></div>
+                  <div class="panel-body">
+                    <h4>微博</h4>
+                    {% if weibo_found %}
+                        <span><small>成功登陆</small>
+                        >> 
+                        <a %="" onclick="return confirm('解绑后将无法用新浪微博登陆ShirleyChou的网站，也无法分享到新浪微博，确定解绑？');" href="/account/cancel_oauth/weibo/">取消绑定</a>
+                    {% else %}
+                        <a href="/account/bind_oauth/weibo/">快来点击绑定吧</a></span>
+
+                    {% endif %}
+                    <hr>
+
+                    <h4>QQ空间</h4>
+
+                    {% if qzone_found %}
+                        <span><small>成功登陆</small>
+                        >> 
+                        <a %="" onclick="return confirm('解绑后将无法用QQ空间登陆ShirleyChou的网站，也无法分享到QQ空间，确定解绑？');" href="/account/cancel_oauth/weibo/">取消绑定</a>
+                    {% else %}
+                        <a href="/account/bind_oauth/qzone/">快来点击绑定吧</a></span>
+                    {% endif %}
+                    <hr>
+
+                    <h4>豆瓣</h4>
+                    {% if douban_found %}
+                        <span><small>成功登陆</small>
+                        >> 
+                        <a %="" onclick="return confirm('解绑后将无法用豆瓣登陆ShirleyChou的网站，也无法分享到豆瓣，确定解绑？');" href="/account/cancel_oauth/weibo/">取消绑定</a>
+                    {% else %}
+                        <a href="/account/bind_oauth/douban/">快来点击绑定吧</a></span>
+                    {% endif %}
+                  </div><!--/panel-body-->
+              </div><!--/panel-->                     
+              
+          	</div><!--/col-->
+         
+     
+       </div><!--/row-->
+  	</div><!--/col-span-9-->
+    
+  </div><!--/row-->
+  <!-- /upper section -->
+  
+  <!-- lower section -->
+  
+
+
+<div class="modal" id="addWidgetModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add Widget</h4>
+      </div>
+      <div class="modal-body">
+        <p>Add a widget stuff here..</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+
+
+
+  
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	</body>
+</html>
