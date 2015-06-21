@@ -10,7 +10,7 @@ http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8
 class WeiBo(OAuth2):
 
     def __init__(self):
-        # self.login_url = 'https://api.weibo.com/oauth2/authorize'
+        self.login_url = 'https://api.weibo.com/oauth2/authorize'
         self.client_id = '2540901753'
         self.client_secret = '5c3657b2ef28188de29338b6aa02f833'
         self.redirect_uri = 'https://stark-earth-8812.herokuapp.com/account/'
