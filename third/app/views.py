@@ -15,9 +15,7 @@ from social.weibo import WeiBo
 douban = DouBan()
 weibo = WeiBo()
 qzone = Qzone()
-# class UserForm(forms.Form):
-# 	username = forms.CharField(label='用户名', max_length=100)
-# 	password = forms.CharField(label='密码', widget=forms.PasswordInput())
+
 global login_db_id
 login_db_id = None
 
@@ -113,19 +111,19 @@ def show_result(weibo_found=False, douban_found=False, qzone_found=False):
 
 
 def cancel_qzone(request):
-    obj = LoginInfo.objects.get(id=login_db_id, "")
+    obj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(qzone_id="")
     show_result()
 
 
 def cancel_weibo(request):
-    obj = LoginInfo.objects.get(id=login_db_id, "")
+    obj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(weibo_id="")
     show_result()
 
 
 def cancel_douban(request):
-    bj = LoginInfo.objects.get(id=login_db_id, "")
+    bj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(douban_id="")
     show_result()
 
