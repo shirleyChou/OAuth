@@ -16,7 +16,6 @@ douban = DouBan()
 weibo = WeiBo()
 qzone = Qzone()
 
-global login_db_id
 login_db_id = None
 
 
@@ -37,6 +36,7 @@ def bind_qzone(request):
 
 
 def handle_data(request):
+    global login_db_id
     weibo_found = False
     douban_found = False
     qzone_found = False
@@ -98,6 +98,7 @@ def handle_data(request):
 
 
 def show_result(weibo_found=False, douban_found=False, qzone_found=False):
+    global login_db_id
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
         weibo_found = True
@@ -114,24 +115,28 @@ def show_result(weibo_found=False, douban_found=False, qzone_found=False):
 
 
 def cancel_qzone(request):
+    global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(qzone_id="")
     show_result()
 
 
 def cancel_weibo(request):
+    global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(weibo_id="")
     show_result()
 
 
 def cancel_douban(request):
+    global login_db_id 
     bj = LoginInfo.objects.get(id=login_db_id)
     lo.objects.filter(id=login_db_id).update(douban_id="")
     show_result()
 
 
 def logout(request):
+    global login_db_id 
     # delete login data
     # if 'blog_user' in request.session:
     #     del request.session['blog_user']
