@@ -36,11 +36,14 @@ def bind_qzone(request):
     return qzone.authorize_url
 
 
-def handle_data(request, code, state):
+def handle_data(request):
     weibo_found = False
     douban_found = False
     qzone_found = False
 
+    if request.method == 'GET':
+        code = request.GET.get('code', '')
+        state = request.GET.get('state', '')
     if login_db_id is None:
         if state == "weibo":
             weibo.get_access_token(code=code)
