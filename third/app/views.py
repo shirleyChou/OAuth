@@ -117,21 +117,21 @@ def cancel_qzone(request):
     global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
     LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
-    show_result()
+    return show_result()
 
 
 def cancel_weibo(request):
     global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
     LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
-    show_result()
+    return show_result()
 
 
 def cancel_douban(request):
     global login_db_id 
     bj = LoginInfo.objects.get(id=login_db_id)
     LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
-    show_result()
+    return show_result()
 
 
 def logout(request):
