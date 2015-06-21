@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from .base import OAuth2
+from base import OAuth2
 
 """
 http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E
@@ -54,3 +54,4 @@ class WeiBo(OAuth2):
 
     # 	url = 'https://api.weibo.com/2/statuses/update.json'
     # 	res = self.api_call_post(url, status=text)
+

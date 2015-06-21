@@ -38,17 +38,17 @@ class OAuth2(object):
     def http_add_header(self, request):
         pass
 
-    @_http_error_handler
+    # @_http_error_handler
     def http_post(self, url, data, parse=True):
         """return data that contains access_token: data['access_token']"""
         req = urllib2.Request(url, data=urlencode(data))
         self.http_add_header(req)
         data = urllib2.urlopen(req).read()
         if parse:
-            return json.loads(data)     # change to json
+            return json.loads(data)
         return data
 
-    @_http_error_handler
+    # @_http_error_handler
     def http_get(self, url, data, parse=True):
         """return data that contains access_token: data['access_token']"""
         req = urllib2.Request('%s?%s' %(url, urlencode(data)))
@@ -84,6 +84,7 @@ class OAuth2(object):
         }
         """
         self.parse_token(response)
+        # return response
 
     def parse_token(self, response):
         """parse data included access_token and user information"""
@@ -104,3 +105,5 @@ class OAuth2(object):
         url = self.build_api_url(url)
         data = self.build_api_data(**kwargs)
         return self.http_post(url, data)
+
+
