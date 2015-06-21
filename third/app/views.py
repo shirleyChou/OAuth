@@ -79,21 +79,21 @@ def handle_data(request):
             if lst and lst[0].id != login_db_id:
                 pass
             else:
-                lst.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
+                LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
             if lst and lst[0].id != login_db_id:
                 pass
             else:
-                lo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
+                LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
             if lst and lst[0].id != login_db_id:
                 pass
             else:
-                lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
+                LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
     return show_result()
 
 
@@ -116,21 +116,21 @@ def show_result(weibo_found=False, douban_found=False, qzone_found=False):
 def cancel_qzone(request):
     global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
-    lo.objects.filter(id=login_db_id).update(qzone_id="")
+    LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
     show_result()
 
 
 def cancel_weibo(request):
     global login_db_id 
     obj = LoginInfo.objects.get(id=login_db_id)
-    lo.objects.filter(id=login_db_id).update(weibo_id="")
+    LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
     show_result()
 
 
 def cancel_douban(request):
     global login_db_id 
     bj = LoginInfo.objects.get(id=login_db_id)
-    lo.objects.filter(id=login_db_id).update(douban_id="")
+    LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
     show_result()
 
 
