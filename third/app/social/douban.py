@@ -26,7 +26,7 @@ class DouBan(OAuth2):
 
     @property
     def authorize_url(self):
-        url = super(Douban, self).authorize_url
+        url = super(DouBan, self).authorize_url
         return '%s&state=douban' % url
 
     def build_api_url(self, url):
