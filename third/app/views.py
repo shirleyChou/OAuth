@@ -37,62 +37,61 @@ def bind_qzone(request):
 
 
 def handle_data(request, code, state):
-    return render_to_response('test.html', {'code': code, 'state': state})
-    # weibo_found = False
-    # douban_found = False
-    # qzone_found = False
+    weibo_found = False
+    douban_found = False
+    qzone_found = False
 
-    # if login_db_id is None:
-    #     if state == "weibo":
-    #         weibo.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(weibo_id__exact=weibo.uid)
-    #         if not lst:
-    #             new = LoginInfo(weibo_id=weibo.uid)
-    #             new.save()
-    #             login_db_id = new.id
-    #         else:
-    #             login_db_id = lst[0].id
-    #     elif state == "douban":
-    #         douban.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(douban_id__exact=douban.uid)
-    #         if not lst:
-    #             new = LoginInfo(douban_id=douban.uid)
-    #             new.save()
-    #             login_db_id = new.id
-    #         else:
-    #             login_db_id = lst[0].id
-    #     else:
-    #         qzone.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(qzone_id__exact=qzone.uid)
-    #         if not lst:
-    #             new = LoginInfo(qzone_id=qzone.uid)
-    #             new.save()
-    #             login_db_id = new.id
-    #         else:
-    #             login_db_id = lst[0].id
-    # else:
-    #     if state == "weibo":
-    #         weibo.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
-    #         if lst and lst[0].id != login_db_id:
-    #             pass
-    #         else:
-    #             lo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
-    #     elif state == "douban":
-    #         douban.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(douban_id=douban.uid)
-    #         if lst and lst[0].id != login_db_id:
-    #             pass
-    #         else:
-    #             lo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
-    #     else:
-    #         qzone.get_access_token(code=code)
-    #         lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
-    #         if lst and lst[0].id != login_db_id:
-    #             pass
-    #         else:
-    #             lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
-    # show_result()
+    if login_db_id is None:
+        if state == "weibo":
+            weibo.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(weibo_id__exact=weibo.uid)
+            if not lst:
+                new = LoginInfo(weibo_id=weibo.uid)
+                new.save()
+                login_db_id = new.id
+            else:
+                login_db_id = lst[0].id
+        elif state == "douban":
+            douban.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(douban_id__exact=douban.uid)
+            if not lst:
+                new = LoginInfo(douban_id=douban.uid)
+                new.save()
+                login_db_id = new.id
+            else:
+                login_db_id = lst[0].id
+        else:
+            qzone.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(qzone_id__exact=qzone.uid)
+            if not lst:
+                new = LoginInfo(qzone_id=qzone.uid)
+                new.save()
+                login_db_id = new.id
+            else:
+                login_db_id = lst[0].id
+    else:
+        if state == "weibo":
+            weibo.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
+            if lst and lst[0].id != login_db_id:
+                pass
+            else:
+                lo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
+        elif state == "douban":
+            douban.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(douban_id=douban.uid)
+            if lst and lst[0].id != login_db_id:
+                pass
+            else:
+                lo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
+        else:
+            qzone.get_access_token(code=code)
+            lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
+            if lst and lst[0].id != login_db_id:
+                pass
+            else:
+                lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
+    show_result()
 
 
 def show_result(weibo_found=False, douban_found=False, qzone_found=False):

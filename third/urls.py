@@ -7,12 +7,12 @@ urlpatterns = patterns('third.app.views',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'login'),
 
-    url(r'^account/\?code=(?P<code>\w+)&state=(?P<state>\w+)$', 'handle_data', name='return code'),
-    url(r'^account/\?state=(?P<state>\w+)&code=(?P<code>\w+)$', 'handle_data', name='code return'),
+    url(r'^account/code=(?P<code>\w+)&state=(?P<state>\w+)', 'handle_data'),
+    url(r'^account/state=(?P<state>\w+)&code=(?P<code>\w+)', 'handle_data'),
 
-    url(r'^account/bind_oauth/qzone/', 'bind_qzone'),
-    url(r'^account/bind_oauth/weibo/', 'bind_weibo'),
-    url(r'^account/bind_oauth/douban/', 'bind_douban'),
+    # url(r'^account/bind_oauth/qzone/', 'bind_qzone'),
+    # url(r'^account/bind_oauth/weibo/', 'bind_weibo'),
+    # url(r'^account/bind_oauth/douban/', 'bind_douban'),
 
     url(r'^account/cancel_oauth/qzone/', 'cancel_qzone'),
     url(r'^account/cancel_oauth/weibo/', 'cancel_weibo'),
