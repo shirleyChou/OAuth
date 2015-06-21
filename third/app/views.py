@@ -94,24 +94,29 @@ def handle_data(request):
                 pass
             else:
                 lo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
-    show_result()
-
-
-def show_result(weibo_found=False, douban_found=False, qzone_found=False):
-    global login_db_id
-    obj = LoginInfo.objects.get(id=login_db_id)
-    if obj.weibo_id:
-        weibo_found = True
-    if obj.douban_id:
-        douban_found = True
-    if obj.qzone_id:
-        qzone_found = True
-
+    # show_result()
     return render_to_response(
         'index.html', {'weibo_found': weibo_found,
                        'douban_found': douban_found,
                        'qzone_found': qzone_found}
     )
+
+
+# def show_result(weibo_found=False, douban_found=False, qzone_found=False):
+#     global login_db_id
+#     obj = LoginInfo.objects.get(id=login_db_id)
+#     if obj.weibo_id:
+#         weibo_found = True
+#     if obj.douban_id:
+#         douban_found = True
+#     if obj.qzone_id:
+#         qzone_found = True
+
+#     return render_to_response(
+#         'index.html', {'weibo_found': weibo_found,
+#                        'douban_found': douban_found,
+#                        'qzone_found': qzone_found}
+#     )
 
 
 def cancel_qzone(request):
