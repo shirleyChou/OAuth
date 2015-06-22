@@ -117,7 +117,7 @@ def show_result(
     return render_to_response(
         'index.html', {'weibo_found': weibo_found,
                        'douban_found': douban_found,
-                       'qzone_found': qzone_found
+                       'qzone_found': qzone_found,
                        'weibo_duplicate': weibo_duplicate,
                        'douban_duplicate': douban_duplicate,
                        'qzone_duplicate': qzone_duplicate}
