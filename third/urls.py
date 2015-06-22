@@ -15,4 +15,5 @@ urlpatterns = patterns('third.app.views',
     url(r'^account/cancel_oauth/douban/', 'cancel_douban'),
     url(r'^account/delete_account/', 'delete_account'),
     url(r'^auth/logout/$', 'logout', name='social_logout'),
+    url(r'^return/to/', 'show_result'),
 )

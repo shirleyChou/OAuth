@@ -15,9 +15,9 @@ weibo = WeiBo()
 qzone = Qzone()
 
 login_db_id = None
-weibo_duplicate = False
-douban_duplicate = False
-qzone_duplicate = False
+# weibo_duplicate = False
+# douban_duplicate = False
+# qzone_duplicate = False
 # remain_one = False
 
 
@@ -27,9 +27,9 @@ def login(request):
 
 def handle_data(request):
     global login_db_id
-    global weibo_duplicate
-    global douban_duplicate
-    global qzone_duplicate
+    # global weibo_duplicate
+    # global douban_duplicate
+    # global qzone_duplicate
     
 
     if request.method == 'GET':
@@ -68,25 +68,28 @@ def handle_data(request):
             weibo.get_access_token(code=code)
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
             if lst and lst[0].id != login_db_id:
-                weibo_duplicate = True
+                # weibo_duplicate = True
+                return render_to_response('duplicate.html')
             else:
-                weibo_duplicate = False
+                # weibo_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
             if lst and lst[0].id != login_db_id:
-                douban_duplicate = True
+                # douban_duplicate = True
+                return render_to_response('duplicate.html')
             else:
-                douban_duplicate = False
+                # douban_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
             if lst and lst[0].id != login_db_id:
-                qzone_duplicate = True
+                # qzone_duplicate = True
+                return render_to_response('duplicate.html')
             else:
-                qzone_duplicate = False
+                # qzone_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
     return show_result()
 
@@ -151,24 +154,24 @@ def show_result():
         'index.html', {'weibo_found': weibo_found,
                        'douban_found': douban_found,
                        'qzone_found': qzone_found,
-                       'weibo_duplicate': weibo_duplicate,
-                       'douban_duplicate': douban_duplicate,
-                       'qzone_duplicate': qzone_duplicate,
+                       # 'weibo_duplicate': weibo_duplicate,
+                       # 'douban_duplicate': douban_duplicate,
+                       # 'qzone_duplicate': qzone_duplicate,
                        'remain_one': remain_one}
     )
 
 
 def logout(request):
     global login_db_id
-    global weibo_duplicate
-    global douban_duplicate
-    global qzone_duplicate
+    # global weibo_duplicate
+    # global douban_duplicate
+    # global qzone_duplicate
     # global remain_one
 
     login_db_id = None
-    weibo_duplicate = False
-    douban_duplicate = False
-    qzone_duplicate = False
+    # weibo_duplicate = False
+    # douban_duplicate = False
+    # qzone_duplicate = False
     # remain_one = False
 
     return HttpResponseRedirect('/')    
