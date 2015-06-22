@@ -25,18 +25,6 @@ def login(request):
     return render_to_response('home.html')
 
 
-# def bind_weibo(request):
-#     return weibo.authorize_url
-
-
-# def bind_douban(request):
-#     return douban.authorize_url
-
-
-# def bind_qzone(request):
-#     return qzone.authorize_url
-
-
 def handle_data(request):
     global login_db_id
     global weibo_duplicate
