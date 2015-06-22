@@ -51,7 +51,7 @@
                   <div class="panel-body">
                     <h4>微博</h4>
                     {% if weibo_found %}
-                        <span><small>成功登陆</small>
+                        <span><small>{{ weibo_name }}成功登陆</small>
                         >>
                         {% if remain_one %}
                         <a %="" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');" href="/account/delete_account/">取消绑定</a>
@@ -68,7 +68,7 @@
                     <h4>QQ空间</h4>
 
                     {% if qzone_found %}
-                        <span><small>成功登陆</small>
+                        <span><small>{{ qzone_name }}成功登陆</small>
                         >> 
                         {% if remain_one %}
                         <a %="" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');" href="/account/delete_account/">取消绑定</a>
@@ -86,7 +86,7 @@
 
                     <h4>豆瓣</h4>
                     {% if douban_found %}
-                        <span><small>成功登陆</small>
+                        <span><small>{{douban_name }}成功登陆</small>
                         >>
                         {% if remain_one %}
                         <a %="" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');" href="/account/delete_account/">取消绑定</a>

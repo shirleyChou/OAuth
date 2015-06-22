@@ -14,6 +14,10 @@ douban = DouBan()
 weibo = WeiBo()
 qzone = Qzone()
 
+douban_name = ""
+weibo_name = ""
+qzone_name = ""
+
 login_db_id = None
 # weibo_duplicate = False
 # douban_duplicate = False
@@ -30,6 +34,9 @@ def handle_data(request):
     # global weibo_duplicate
     # global douban_duplicate
     # global qzone_duplicate
+    global douban_name
+    global weibo_name
+    global qzone_name
     
 
     if request.method == 'GET':
@@ -43,8 +50,10 @@ def handle_data(request):
                 new = LoginInfo(weibo_id=weibo.uid)
                 new.save()
                 login_db_id = new.id
+                weibo_name = new.name
             else:
                 login_db_id = lst[0].id
+                weibo_name = lst[0].name
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
@@ -52,8 +61,10 @@ def handle_data(request):
                 new = LoginInfo(douban_id=douban.uid)
                 new.save()
                 login_db_id = new.id
+                douban_name = new.name
             else:
                 login_db_id = lst[0].id
+                douban_name = lst[0].name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
@@ -61,8 +72,10 @@ def handle_data(request):
                 new = LoginInfo(qzone_id=qzone.uid)
                 new.save()
                 login_db_id = new.id
+                qzone_name = new.name
             else:
                 login_db_id = lst[0].id
+                qzone_name = lst[0].name
     else:
         if state == "weibo":
             weibo.get_access_token(code=code)
@@ -73,6 +86,8 @@ def handle_data(request):
             else:
                 # weibo_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
+                weibo_name = weibo.name
+
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
@@ -82,6 +97,7 @@ def handle_data(request):
             else:
                 # douban_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
+                douban_name = douban.name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
@@ -91,36 +107,43 @@ def handle_data(request):
             else:
                 # qzone_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
+                qzone_name = qzone.name
     return show_result()
 
 
 def cancel_qzone(request):
+    global qzone_name
     # global remain_one
     # obj = LoginInfo.objects.get(id=login_db_id)
     # if obj.qzone_id != "" and obj.weibo_id == "" and obj.douban_id == "":
         # remain_one = True
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
+    qzone_name = ""
     return show_result()
 
 
 def cancel_weibo(request):
+    global weibo_name
     # global remain_one
     # obj = LoginInfo.objects.get(id=login_db_id)
     # if obj.weibo_id != "" and obj.qzone_id == "" and obj.douban_id == "":
     #     remain_one = True
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
+    weibo_name = ""
     return show_result()
 
 
 def cancel_douban(request):
+    global douban_name
     # global remain_one
     # obj = LoginInfo.objects.get(id=login_db_id)
     # if obj.douban_id != "" and obj.qzone_id == "" and obj.weibo_id == "":
     #     remain_one = True
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
+    douban_name = ""
     return show_result()
 
 
@@ -157,7 +180,10 @@ def show_result():
                        # 'weibo_duplicate': weibo_duplicate,
                        # 'douban_duplicate': douban_duplicate,
                        # 'qzone_duplicate': qzone_duplicate,
-                       'remain_one': remain_one}
+                       'remain_one': remain_one,
+                       'weibo_name': weibo_name,
+                       'douban_name': douban_name,
+                       'qzone_name': qzone_name}
     )
 
 
@@ -173,5 +199,9 @@ def logout(request):
     # douban_duplicate = False
     # qzone_duplicate = False
     # remain_one = False
+    douban_name = ""
+    weibo_name = ""
+    qzone_name = ""
+
 
     return HttpResponseRedirect('/')    
