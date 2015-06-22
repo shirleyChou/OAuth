@@ -9,11 +9,12 @@ from base import OAuth2
 QQ_OPENID_PATTERN = re.compile('\{.+\}')
 
 """
-http://wiki.open.qq.com/wiki/website/%E4%BD%BF%E7%94%A8Authorization_Code%E8%8E%B7%E5%8F%96Access_Token
+'http://wiki.open.qq.com/wiki/website/%E4%BD%BF%E7%94%' \
+'A8Authorization_Code%E8%8E%B7%E5%8F%96Access_Token'
 """
 
-class Qzone(OAuth2):
 
+class Qzone(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://graph.qq.com/oauth2.0/authorize'
@@ -51,7 +52,6 @@ class Qzone(OAuth2):
         if 'callback(' in res:
             res = res[res.index('(')+1:res.rindex(')')]
             res = json.loads(res)
-            # raise SocialAPIError(self.site_name, '', u'%s:%s' % (res['error'],res['error_description']) )
         else:
             res = res.split('&')
             res = [_r.split('=') for _r in res]
@@ -61,7 +61,10 @@ class Qzone(OAuth2):
         self.expires_in = int(res['expires_in'])
         # self.refresh_token = None
 
-        res = self.http_get(self.openid_url, {'access_token': self.access_token}, parse=False)
+        res = self.http_get(
+            self.openid_url, 
+            {'access_token': self.access_token}, 
+            parse=False)
         res = json.loads(QQ_OPENID_PATTERN.search(res).group())
 
         self.uid = res['openid']

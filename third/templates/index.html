@@ -57,6 +57,9 @@
                     {% else %}
                         <!-- <a href="/account/bind_oauth/weibo/">快来点击绑定吧</a></span> -->
                         <a href="https://api.weibo.com/oauth2/authorize?client_id=2540901753&response_type=code&redirect_uri=https%3A//stark-earth-8812.herokuapp.com/account/&state=weibo">快来点击绑定吧</a></span>
+                        {% if weibo_duplicate %}
+                            <a %="" onclick="return confirm('Hmm...该微博账号已经被其他用户绑定了哟');"></a>
+                        {% endif %}
                     {% endif %}
                     <hr>
 
@@ -69,6 +72,9 @@
                     {% else %}
                         <!-- <a href="/account/bind_oauth/qzone/">快来点击绑定吧</a></span> -->
                         <a href="http://openapi.qzone.qq.com/oauth/show?which=Login&client_id=101224067&response_type=code&redirect_uri=http%3A//stark-earth-8812.herokuapp.com/account/&state=qzone">快来点击绑定吧</a></span>
+                        {% if qzone_duplicate %}
+                            <a %="" onclick="return confirm('Hmm...该QQ账号已经被其他用户绑定了哟');"></a>
+                        {% endif %}
                     {% endif %}
                     <hr>
 
@@ -80,6 +86,9 @@
                     {% else %}
                         <!-- <a href="/account/bind_oauth/douban/">快来点击绑定吧</a></span> -->
                         <a href="https://www.douban.com/service/auth2/auth?client_id=0e6954be9322f5f82b3bfe3bb968e1e8&response_type=code&redirect_uri=https%3A//stark-earth-8812.herokuapp.com/account/&state=douban">快来点击绑定吧</a></span>
+                        {% if douban_duplicate %}
+                            <a %="" onclick="return confirm('Hmm...该豆瓣账号已经被其他用户绑定了哟');"></a>
+                        {% endif %}
                     {% endif %}
                   </div><!--/panel-body-->
               </div><!--/panel-->                     

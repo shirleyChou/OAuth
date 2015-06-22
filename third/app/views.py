@@ -40,6 +40,9 @@ def handle_data(request):
     weibo_found = False
     douban_found = False
     qzone_found = False
+    weibo_duplicate = False
+    douban_duplicate = False
+    qzone_duplicate = False
 
     if request.method == 'GET':
         code = request.GET.get('code', '')
@@ -75,29 +78,34 @@ def handle_data(request):
     else:
         if state == "weibo":
             weibo.get_access_token(code=code)
-            lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
+            lst = LoginInfo.objects.filter(weibo_id__exact=weibo.uid)
             if lst and lst[0].id != login_db_id:
-                pass
+                weibo_duplicate = True
             else:
                 LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
         elif state == "douban":
             douban.get_access_token(code=code)
-            lst = LoginInfo.objects.filter(douban_id=douban.uid)
+            lst = LoginInfo.objects.filter(douban_id__exact=douban.uid)
             if lst and lst[0].id != login_db_id:
-                pass
+                douban_duplicate = True
             else:
                 LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
         else:
             qzone.get_access_token(code=code)
-            lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
+            lst = LoginInfo.objects.filter(qzone_id__exact=qzone.uid)
             if lst and lst[0].id != login_db_id:
-                pass
+                qzone_duplicate = True
             else:
                 LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
-    return show_result()
+    return show_result(
+        weibo_duplicate=weibo_duplicate, 
+        douban_duplicate=douban_duplicate, 
+        qzone_duplicate=qzone_duplicate)
 
 
-def show_result(weibo_found=False, douban_found=False, qzone_found=False):
+def show_result(
+    weibo_found=False, douban_found=False, qzone_found=False, 
+    weibo_duplicate, douban_duplicate, qzone_duplicate):
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
         weibo_found = True
@@ -109,7 +117,10 @@ def show_result(weibo_found=False, douban_found=False, qzone_found=False):
     return render_to_response(
         'index.html', {'weibo_found': weibo_found,
                        'douban_found': douban_found,
-                       'qzone_found': qzone_found}
+                       'qzone_found': qzone_found
+                       'weibo_duplicate': weibo_duplicate,
+                       'douban_duplicate': douban_duplicate,
+                       'qzone_duplicate': qzone_duplicate}
     )
 
 

@@ -13,7 +13,6 @@ def _http_error_handler(func):
 
 class OAuth2(object):
 
-
     def __init__(self):
         self.login_url = None
         self.client_id = None
@@ -63,7 +62,7 @@ class OAuth2(object):
         redirect_uri with authorization_code(code='9b73a4248')
         """
         data = {
-            'code': code, 
+            'code': code,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'redirect_uri': self.redirect_uri,
@@ -71,11 +70,10 @@ class OAuth2(object):
         }
 
         if method == 'POST':
-        	response = self.http_post(self.access_token_url, data, parse=parse)
+            response = self.http_post(self.access_token_url, data, parse=parse)
         else:
-        	response = self.http_get(self.access_token_url, data, parse=parse)
+            response = self.http_get(self.access_token_url, data, parse=parse)
         self.parse_token(response)
-
 
     def parse_token(self, response):
         """parse data included access_token and user information"""
@@ -96,5 +94,3 @@ class OAuth2(object):
         url = self.build_api_url(url)
         data = self.build_api_data(**kwargs)
         return self.http_post(url, data)
-
-

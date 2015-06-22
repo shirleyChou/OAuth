@@ -7,8 +7,8 @@ from base import OAuth2
 http://developers.douban.com/wiki/?title=oauth2
 """
 
-class DouBan(OAuth2):
 
+class DouBan(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://www.douban.com/service/auth2/auth'
@@ -37,7 +37,8 @@ class DouBan(OAuth2):
 
     def http_add_header(self, request):
         if getattr(self, 'access_token', None):
-            request.add_header('Authorization',  'Bearer %s' % self.access_token)
+            request.add_header('Authorization',
+                               'Bearer %s' % self.access_token)
 
     def parse_token(self, res):
         self.uid = res['douban_user_id']
@@ -50,7 +51,3 @@ class DouBan(OAuth2):
         self.name = res['name']
         # self.avatar = res['avatar']
         # self.avatar_large = ""
-
-
-
-
