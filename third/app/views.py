@@ -103,9 +103,8 @@ def handle_data(request):
         qzone_duplicate=qzone_duplicate)
 
 
-def show_result(
-    weibo_found=False, douban_found=False, qzone_found=False, 
-    weibo_duplicate, douban_duplicate, qzone_duplicate):
+def show_result(weibo_duplicate, douban_duplicate, qzone_duplicate,
+    weibo_found=False, douban_found=False, qzone_found=False):
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
         weibo_found = True
