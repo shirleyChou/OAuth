@@ -50,10 +50,9 @@ def handle_data(request):
                 new = LoginInfo(weibo_id=weibo.uid)
                 new.save()
                 login_db_id = new.id
-                weibo_name = new.name
             else:
                 login_db_id = lst[0].id
-                weibo_name = lst[0].name
+            weibo_name = weibo.name
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
@@ -61,10 +60,9 @@ def handle_data(request):
                 new = LoginInfo(douban_id=douban.uid)
                 new.save()
                 login_db_id = new.id
-                douban_name = new.name
             else:
                 login_db_id = lst[0].id
-                douban_name = lst[0].name
+            douban_name = douban.name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
@@ -72,10 +70,9 @@ def handle_data(request):
                 new = LoginInfo(qzone_id=qzone.uid)
                 new.save()
                 login_db_id = new.id
-                qzone_name = new.name
             else:
                 login_db_id = lst[0].id
-                qzone_name = lst[0].name
+            qzone_name = qzone.name
     else:
         if state == "weibo":
             weibo.get_access_token(code=code)
