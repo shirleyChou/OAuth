@@ -152,6 +152,9 @@ def show_result():
     # global weibo_found
     # global douban_found
     # global qzone_found
+    weibo_found = False
+    douban_found = False
+    qzone_found = False
 
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
