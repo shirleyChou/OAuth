@@ -2,7 +2,7 @@
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import logout
+# from django.contrib.auth import logout
 
 from models import LoginInfo
 from social.douban import DouBan
@@ -179,5 +179,5 @@ def logout(request):
     qzone_duplicate = False
     all_delete = False
 
-    logout(request)
+    # logout(request)
     return HttpResponseRedirect('/')    
