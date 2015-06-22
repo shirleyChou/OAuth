@@ -94,7 +94,7 @@
                         <a %="" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');" href="/account/delete_account/">取消绑定</a>
                         {% else %} 
                         <a %="" onclick="return confirm('解绑后将无法用豆瓣登陆ShirleyChou的网站，也无法分享到豆瓣，确定解绑？');" href="/account/cancel_oauth/douban/">取消绑定</a>
-                        {% endlf %}
+                        {% endif %}
                     {% else %}
                         <!-- <a href="/account/bind_oauth/douban/">快来点击绑定吧</a></span> -->
                         <a href="https://www.douban.com/service/auth2/auth?client_id=060f4e343dd09e61122dea9cb971db23&response_type=code&redirect_uri=https%3A//calm-basin-4108.herokuapp.com/account/&state=douban">快来点击绑定吧</a></span>
