@@ -15,7 +15,7 @@ class WeiBo(OAuth2):
         self.login_url = 'https://api.weibo.com/oauth2/authorize'
         self.client_id = '2540901753'
         self.client_secret = '5c3657b2ef28188de29338b6aa02f833'
-        self.redirect_uri = 'https://stark-earth-8812.herokuapp.com/account/'
+        self.redirect_uri = 'https://calm-basin-4108.herokuapp.com/account/'
         self.access_token_url = 'https://api.weibo.com/oauth2/access_token'
         self.access_token = None
         self.expires_in = None

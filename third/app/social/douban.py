@@ -14,7 +14,7 @@ class DouBan(OAuth2):
         self.login_url = 'https://www.douban.com/service/auth2/auth'
         self.client_id = '0e6954be9322f5f82b3bfe3bb968e1e8'
         self.client_secret = 'e1264c6c86c9ccab'
-        self.redirect_uri = 'https://stark-earth-8812.herokuapp.com/account/'
+        self.redirect_uri = 'https://calm-basin-4108.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'
         self.uid = None

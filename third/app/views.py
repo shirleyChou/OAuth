@@ -25,7 +25,7 @@ def login(request):
     return render_to_response('home.html')
 
 
-# def bind_weibo(request):
+def bind_weibo(request):
 #     return weibo.authorize_url
 
 
