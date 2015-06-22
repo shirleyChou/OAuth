@@ -18,8 +18,8 @@ class Qzone(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://graph.qq.com/oauth2.0/authorize'
-        self.client_id = '101228908'
-        self.client_secret = '39230718213a4766c6a57a558ce77c29'
+        self.client_id = '101224331'
+        self.client_secret = '6df31a62152d5c9936f58899119915c7'
         self.redirect_uri = 'http://sleepy-caverns-4864.herokuapp.com/account/'
         self.access_token_url = 'https://graph.qq.com/oauth2.0/token'
         self.openid_url = 'https://graph.qq.com/oauth2.0/me'
