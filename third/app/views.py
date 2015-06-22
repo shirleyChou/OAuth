@@ -19,9 +19,9 @@ qzone = Qzone()
 
 login_db_id = None
 
-weibo_found = False
-douban_found = False
-qzone_found = False
+# weibo_found = False
+# douban_found = False
+# qzone_found = False
 
 weibo_duplicate = False
 douban_duplicate = False
@@ -149,9 +149,9 @@ def cancel_douban(request):
 
 
 def show_result():
-    global weibo_found
-    global douban_found
-    global qzone_found
+    # global weibo_found
+    # global douban_found
+    # global qzone_found
 
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
@@ -174,18 +174,18 @@ def show_result():
 
 def logout(request):
     global login_db_id
-    global weibo_found
-    global douban_found
-    global qzone_found
+    # global weibo_found
+    # global douban_found
+    # global qzone_found
     global weibo_duplicate
     global douban_duplicate
     global qzone_duplicate
     # global all_delete
 
     login_db_id = None
-    weibo_found = False
-    douban_found = False
-    qzone_found = False
+    # weibo_found = False
+    # douban_found = False
+    # qzone_found = False
 
     weibo_duplicate = False
     douban_duplicate = False
