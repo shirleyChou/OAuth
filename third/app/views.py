@@ -3,9 +3,6 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import logout
-# from django.template import RequestContext
-# from django import forms
-# from models import User
 
 from models import LoginInfo
 from social.douban import DouBan
@@ -18,16 +15,10 @@ weibo = WeiBo()
 qzone = Qzone()
 
 login_db_id = None
-
-# weibo_found = False
-# douban_found = False
-# qzone_found = False
-
 weibo_duplicate = False
 douban_duplicate = False
 qzone_duplicate = False
-
-# all_delete = False
+all_delete = False
 
 
 def login(request):
@@ -177,23 +168,16 @@ def show_result():
 
 def logout(request):
     global login_db_id
-    # global weibo_found
-    # global douban_found
-    # global qzone_found
     global weibo_duplicate
     global douban_duplicate
     global qzone_duplicate
-    # global all_delete
+    global all_delete
 
     login_db_id = None
-    # weibo_found = False
-    # douban_found = False
-    # qzone_found = False
-
     weibo_duplicate = False
     douban_duplicate = False
     qzone_duplicate = False
-  
     all_delete = False
+
     logout(request)
     return HttpResponseRedirect('/')    
