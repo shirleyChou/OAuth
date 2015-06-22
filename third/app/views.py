@@ -140,11 +140,11 @@ def show_result():
     if obj.qzone_id:
         qzone_found = True
 
-    if weibo_found = True and douban_found = False and qzone_found = False:
+    if weibo_found == True and douban_found == False and qzone_found == False:
         remain_one = True
-    if weibo_found = False and douban_found = True and qzone_found = False:
+    if weibo_found == False and douban_found == True and qzone_found == False:
         remain_one = True
-    if weibo_found = False and douban_found = False and qzone_found = True:
+    if weibo_found == False and douban_found == False and qzone_found == True:
         remain_one = True
 
     return render_to_response(
