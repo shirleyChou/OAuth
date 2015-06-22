@@ -12,8 +12,8 @@ class DouBan(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://www.douban.com/service/auth2/auth'
-        self.client_id = '0e6954be9322f5f82b3bfe3bb968e1e8'
-        self.client_secret = 'e1264c6c86c9ccab'
+        self.client_id = '060f4e343dd09e61122dea9cb971db23'
+        self.client_secret = 'c9753e1b45890bb4'
         self.redirect_uri = 'https://calm-basin-4108.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'
