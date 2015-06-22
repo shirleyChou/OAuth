@@ -149,6 +149,10 @@ def cancel_douban(request):
 
 
 def show_result():
+    global weibo_found
+    global douban_found
+    global qzone_found
+
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id:
         weibo_found = True
