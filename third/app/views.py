@@ -18,7 +18,7 @@ login_db_id = None
 weibo_duplicate = False
 douban_duplicate = False
 qzone_duplicate = False
-all_delete = False
+remain_one = False
 
 
 def login(request):
@@ -92,39 +92,33 @@ def handle_data(request):
 
 
 def cancel_qzone(request):
-    global all_delete
+    global remain_one
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.qzone_id != "" and obj.weibo_id == "" and obj.douban_id == "":
-        all_delete = True
-        LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
-        return HttpResponseRedirect('/auth/logout/')
+        remain_one = True
     else:
         LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
-        return show_result()
+    return show_result()
 
 
 def cancel_weibo(request):
-    global all_delete
+    global remain_one
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.weibo_id != "" and obj.qzone_id == "" and obj.douban_id == "":
-        all_delete = True
-        LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
-        return HttpResponseRedirect('/auth/logout/')
+        remain_one = True
     else:
         LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
-        return show_result()
+    return show_result()
 
 
 def cancel_douban(request):
-    global all_delete
+    global remain_one
     obj = LoginInfo.objects.get(id=login_db_id)
     if obj.douban_id != "" and obj.qzone_id == "" and obj.weibo_id == "":
-        all_delete = True
-        LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
-        return HttpResponseRedirect('/auth/logout/')
+        remain_one = True
     else:
         LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
-        return show_result()
+    return show_result()
 
 
 def show_result():
@@ -147,8 +141,12 @@ def show_result():
                        'weibo_duplicate': weibo_duplicate,
                        'douban_duplicate': douban_duplicate,
                        'qzone_duplicate': qzone_duplicate,
-                       'all_delete': all_delete}
+                       'remain_one': remain_one}
     )
+
+def delete_account(self):
+    LoginInfo.objects.filter(id=login_db_id).delete()
+    return HttpResponseRedirect('/auth/logout/')
 
 
 def logout(request):
@@ -156,12 +154,12 @@ def logout(request):
     global weibo_duplicate
     global douban_duplicate
     global qzone_duplicate
-    global all_delete
+    global remain_one
 
     login_db_id = None
     weibo_duplicate = False
     douban_duplicate = False
     qzone_duplicate = False
-    all_delete = False
+    remain_one = False
 
     return HttpResponseRedirect('/')    

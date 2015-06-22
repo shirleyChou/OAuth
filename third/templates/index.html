@@ -61,9 +61,6 @@
                     {% if weibo_duplicate %}
                         <a %="" onclick="return confirm('Hmm...该微博账号已经被其他用户绑定了哟');"></a>
                     {% endif %}
-                    {% if all_delete %}
-                        <a %="" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');"></a>
-                    {% endif %}
                     <hr>
 
                     <h4>QQ空间</h4>
@@ -71,7 +68,7 @@
                     {% if qzone_found %}
                         <span><small>成功登陆</small>
                         >> 
-                        <a %="" onclick="return confirm('解绑后将无法用QQ空间登陆ShirleyChou的网站，也无法分享到QQ空间，确定解绑？');" href="/account/cancel_oauth/weibo/">取消绑定</a>
+                        <a %="" onclick="return confirm('解绑后将无法用QQ空间登陆ShirleyChou的网站，也无法分享到QQ空间，确定解绑？');" href="/account/cancel_oauth/qzone/">取消绑定</a>
                     {% else %}
                         <!-- <a href="/account/bind_oauth/qzone/">快来点击绑定吧</a></span> -->
                         <a href="http://openapi.qzone.qq.com/oauth/show?which=Login&client_id=101228908&response_type=code&redirect_uri=http%3A//calm-basin-4108.herokuapp.com/account/&state=qzone">快来点击绑定吧</a></span>
@@ -83,15 +80,19 @@
 
                     <h4>豆瓣</h4>
                     {% if douban_found %}
+
                         <span><small>成功登陆</small>
                         >> 
-                        <a %="" onclick="return confirm('解绑后将无法用豆瓣登陆ShirleyChou的网站，也无法分享到豆瓣，确定解绑？');" href="/account/cancel_oauth/weibo/">取消绑定</a>
+                        <a %="" onclick="return confirm('解绑后将无法用豆瓣登陆ShirleyChou的网站，也无法分享到豆瓣，确定解绑？');" href="/account/cancel_oauth/douban/">取消绑定</a>
                     {% else %}
                         <!-- <a href="/account/bind_oauth/douban/">快来点击绑定吧</a></span> -->
                         <a href="https://www.douban.com/service/auth2/auth?client_id=060f4e343dd09e61122dea9cb971db23&response_type=code&redirect_uri=https%3A//calm-basin-4108.herokuapp.com/account/&state=douban">快来点击绑定吧</a></span>
                     {% endif %}
                     {% if douban_duplicate %}
                         <a %="" onclick="return confirm('Hmm...该豆瓣账号已经被其他用户绑定了哟');"></a>
+                    {% endif %}
+                    {% if remain_one %}
+                        <a %="/account/delete_account/" onclick="return confirm('解绑这个账户以后，你的帐号会被注销哦，这个帐号将无法再登上了，你确定吗？');"></a>
                     {% endif %}
                   </div><!--/panel-body-->
               </div><!--/panel-->                     
