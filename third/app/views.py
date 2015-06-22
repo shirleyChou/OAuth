@@ -37,18 +37,24 @@ def handle_data(request):
     global douban_name
     global weibo_name
     global qzone_name
-    
-
+      
+    # get code and state used for getting access taken
     if request.method == 'GET':
         code = request.GET.get('code', '')
         state = request.GET.get('state', '')
+    # if it is going to login
     if login_db_id is None:
+        # if user login using weibo
         if state == "weibo":
+            # use code(状态码) to access weibo uid
             weibo.get_access_token(code=code)
+            # whether or not the user is registered 
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
+            # if is not, create record into database
             if not lst:
                 new = LoginInfo(weibo_id=weibo.uid)
                 new.save()
+            # login_db_id used for recognizing which row of data(a user) login
                 login_db_id = new.id
             else:
                 login_db_id = lst[0].id
@@ -73,10 +79,15 @@ def handle_data(request):
             else:
                 login_db_id = lst[0].id
             qzone_name = qzone.name
+    # if user has login to the website, 
+    # and user want to bind another social account
     else:
+        # if user want to bind weibo
         if state == "weibo":
             weibo.get_access_token(code=code)
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
+            # but weibo accout exist in the database, 
+            # which means another user has binded to this account
             if lst and lst[0].id != login_db_id:
                 # weibo_duplicate = True
                 return render_to_response('duplicate.html')
@@ -163,11 +174,11 @@ def show_result():
     if obj.qzone_id:
         qzone_found = True
 
-    if weibo_found == True and douban_found == False and qzone_found == False:
+    if weibo_found is True and douban_found is False and qzone_found is False:
         remain_one = True
-    if weibo_found == False and douban_found == True and qzone_found == False:
+    if weibo_found is False and douban_found is True and qzone_found is False:
         remain_one = True
-    if weibo_found == False and douban_found == False and qzone_found == True:
+    if weibo_found is False and douban_found is False and qzone_found is True:
         remain_one = True
 
     return render_to_response(
@@ -199,6 +210,5 @@ def logout(request):
     douban_name = ""
     weibo_name = ""
     qzone_name = ""
-
 
     return HttpResponseRedirect('/')    
