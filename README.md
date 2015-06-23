@@ -25,6 +25,7 @@
 
 =
 
+```bash
 project架构：
 third
 ├── app
@@ -54,3 +55,4 @@ third
 │   └── index.html
 ├── urls.py
 └── wsgi.py
+```
