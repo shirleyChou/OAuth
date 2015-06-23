@@ -17,8 +17,6 @@
 
 =
 
-
-
 技术实现：
 * Django 1.8.2 
 * Python 2.7.10
@@ -26,3 +24,33 @@
 * 前端用了Bootstrap，也自己写了一部分  
 
 =
+
+project架构：
+third
+├── app
+│   ├── admin.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── social
+│   │   ├── base.py
+│   │   ├── douban.py
+│   │   ├── __init__.py
+│   │   ├── qzone.py
+│   │   └── weibo.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── __init__.py
+├── settings.py
+├── static
+│   ├── css
+│   ├── font-awesome
+│   ├── fonts
+│   ├── img
+│   └── js
+├── templates
+│   ├── duplicate.html
+│   ├── home.html
+│   └── index.html
+├── urls.py
+└── wsgi.py
