@@ -135,6 +135,8 @@ def delete_account(request):
 
 
 def show_result(request):
+    global login_db_id
+    
     weibo_found = False
     douban_found = False
     qzone_found = False
