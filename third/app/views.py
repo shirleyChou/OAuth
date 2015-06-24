@@ -143,7 +143,7 @@ def show_result(request):
     obj = LoginInfo.objects.filter(id=login_db_id)
     if len(obj) == 0:
         login_db_id == None
-        return login()
+        return HttpResponseRedirect('/')
     else:
         obj = obj[0]
         if obj.weibo_id:
