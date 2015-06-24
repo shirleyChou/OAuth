@@ -119,7 +119,8 @@ def handle_data(request):
                 # qzone_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
                 qzone_name = qzone.name
-    return show_result()
+    # return login()
+    return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_qzone(request):
@@ -131,7 +132,7 @@ def cancel_qzone(request):
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
     qzone_name = ""
-    return show_result()
+    return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_weibo(request):
@@ -143,7 +144,7 @@ def cancel_weibo(request):
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
     weibo_name = ""
-    return show_result()
+    return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_douban(request):
@@ -155,7 +156,7 @@ def cancel_douban(request):
     # else:
     LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
     douban_name = ""
-    return show_result()
+    return HttpResponseRedirect('/account/bind/')
 
 
 def delete_account(self):
