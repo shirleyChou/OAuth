@@ -2,7 +2,6 @@
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
-# from django.contrib.auth import logout
 
 from models import LoginInfo
 from social.douban import DouBan
@@ -19,10 +18,6 @@ weibo_name = ""
 qzone_name = ""
 
 login_db_id = None
-# weibo_duplicate = False
-# douban_duplicate = False
-# qzone_duplicate = False
-# remain_one = False
 
 
 def login(request):
@@ -34,9 +29,6 @@ def login(request):
 
 def handle_data(request):
     global login_db_id
-    # global weibo_duplicate
-    # global douban_duplicate
-    # global qzone_duplicate
     global douban_name
     global weibo_name
     global qzone_name
@@ -92,10 +84,8 @@ def handle_data(request):
             # but weibo accout exist in the database, 
             # which means another user has binded to this account
             if lst and lst[0].id != login_db_id:
-                # weibo_duplicate = True
                 return render_to_response('duplicate.html')
             else:
-                # weibo_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
                 weibo_name = weibo.name
 
@@ -103,33 +93,23 @@ def handle_data(request):
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
             if lst and lst[0].id != login_db_id:
-                # douban_duplicate = True
                 return render_to_response('duplicate.html')
             else:
-                # douban_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
                 douban_name = douban.name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
             if lst and lst[0].id != login_db_id:
-                # qzone_duplicate = True
                 return render_to_response('duplicate.html')
             else:
-                # qzone_duplicate = False
                 LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
                 qzone_name = qzone.name
-    # return login()
     return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_qzone(request):
     global qzone_name
-    # global remain_one
-    # obj = LoginInfo.objects.get(id=login_db_id)
-    # if obj.qzone_id != "" and obj.weibo_id == "" and obj.douban_id == "":
-        # remain_one = True
-    # else:
     LoginInfo.objects.filter(id=login_db_id).update(qzone_id="")
     qzone_name = ""
     return HttpResponseRedirect('/account/bind/')
@@ -137,11 +117,6 @@ def cancel_qzone(request):
 
 def cancel_weibo(request):
     global weibo_name
-    # global remain_one
-    # obj = LoginInfo.objects.get(id=login_db_id)
-    # if obj.weibo_id != "" and obj.qzone_id == "" and obj.douban_id == "":
-    #     remain_one = True
-    # else:
     LoginInfo.objects.filter(id=login_db_id).update(weibo_id="")
     weibo_name = ""
     return HttpResponseRedirect('/account/bind/')
@@ -149,23 +124,18 @@ def cancel_weibo(request):
 
 def cancel_douban(request):
     global douban_name
-    # global remain_one
-    # obj = LoginInfo.objects.get(id=login_db_id)
-    # if obj.douban_id != "" and obj.qzone_id == "" and obj.weibo_id == "":
-    #     remain_one = True
-    # else:
     LoginInfo.objects.filter(id=login_db_id).update(douban_id="")
     douban_name = ""
     return HttpResponseRedirect('/account/bind/')
 
 
-def delete_account(self):
+def delete_account(request):
     LoginInfo.objects.filter(id=login_db_id).delete()
     return HttpResponseRedirect('/auth/logout/')
 
 
-def show_result():
-    weibo_found = False
+def show_result(request):
+    weibo_found = Falseg
     douban_found = False
     qzone_found = False
     remain_one = False
@@ -189,9 +159,6 @@ def show_result():
         'index.html', {'weibo_found': weibo_found,
                        'douban_found': douban_found,
                        'qzone_found': qzone_found,
-                       # 'weibo_duplicate': weibo_duplicate,
-                       # 'douban_duplicate': douban_duplicate,
-                       # 'qzone_duplicate': qzone_duplicate,
                        'remain_one': remain_one,
                        'weibo_name': weibo_name,
                        'douban_name': douban_name,
@@ -201,16 +168,8 @@ def show_result():
 
 def logout(request):
     global login_db_id
-    # global weibo_duplicate
-    # global douban_duplicate
-    # global qzone_duplicate
-    # global remain_one
 
     login_db_id = None
-    # weibo_duplicate = False
-    # douban_duplicate = False
-    # qzone_duplicate = False
-    # remain_one = False
     douban_name = ""
     weibo_name = ""
     qzone_name = ""
