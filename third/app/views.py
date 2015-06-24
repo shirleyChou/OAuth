@@ -135,7 +135,7 @@ def delete_account(request):
 
 
 def show_result(request):
-    weibo_found = Falseg
+    weibo_found = False
     douban_found = False
     qzone_found = False
     remain_one = False
