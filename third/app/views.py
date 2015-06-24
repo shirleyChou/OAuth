@@ -140,13 +140,18 @@ def show_result(request):
     qzone_found = False
     remain_one = False
 
-    obj = LoginInfo.objects.get(id=login_db_id)
-    if obj.weibo_id:
-        weibo_found = True
-    if obj.douban_id:
-        douban_found = True
-    if obj.qzone_id:
-        qzone_found = True
+    obj = LoginInfo.objects.filter(id=login_db_id)
+    if len(obj) == 0:
+        login_db_id == None
+        return login()
+    else:
+        obj = obj[0]
+        if obj.weibo_id:
+            weibo_found = True
+        if obj.douban_id:
+            douban_found = True
+        if obj.qzone_id:
+            qzone_found = True
 
     if weibo_found is True and douban_found is False and qzone_found is False:
         remain_one = True
