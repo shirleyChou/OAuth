@@ -26,6 +26,8 @@ login_db_id = None
 
 
 def login(request):
+    if login_db_id is not None:
+        return show_result()
     return render_to_response('home.html')
 
 
