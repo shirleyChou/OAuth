@@ -22,7 +22,7 @@ login_db_id = None
 
 def login(request):
     if login_db_id is not None:
-        return show_result()
+        return show_result
     else:
         return render_to_response('home.html')
 
@@ -134,9 +134,10 @@ def delete_account(request):
     return HttpResponseRedirect('/auth/logout/')
 
 
-def show_result(request):
+@property
+def show_result():
     global login_db_id
-    
+
     weibo_found = False
     douban_found = False
     qzone_found = False
