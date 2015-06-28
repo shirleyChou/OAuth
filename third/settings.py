@@ -6,7 +6,7 @@ PROD_DIR = os.path.dirname(__file__)
 
 SECRET_KEY = 'ca*6)5a5moyme+v*7wqras&2j(4!e10e_e=*q21kd27g%yg_c*'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
