@@ -35,7 +35,7 @@ def handle_data(request):
         code = request.GET.get('code', '')
         state = request.GET.get('state', '')
     pk = request.session.get('login_db_id', '')
-    if pk is None:
+    if pk == '':
         if state == "weibo":
             weibo.get_access_token(code=code)
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
@@ -74,7 +74,7 @@ def handle_data(request):
             if lst and lst[0].id != pk:
                 return render_to_response('duplicate.html')
             else:
-                LoginInfo.objects.filter(id=int(pk)).update(weibo_id=weibo.uid)
+                LoginInfo.objects.filter(id=pk).update(weibo_id=weibo.uid)
                 weibo_name = weibo.name
 
         elif state == "douban":
@@ -84,7 +84,7 @@ def handle_data(request):
                 return render_to_response('duplicate.html')
             else:
                 LoginInfo.objects.filter(
-                    id=int(pk)).update(douban_id=douban.uid)
+                    id=pk).update(douban_id=douban.uid)
                 douban_name = douban.name
         else:
             qzone.get_access_token(code=code)
@@ -92,7 +92,7 @@ def handle_data(request):
             if lst and lst[0].id != pk:
                 return render_to_response('duplicate.html')
             else:
-                LoginInfo.objects.filter(id=int(pk)).update(qzone_id=qzone.uid)
+                LoginInfo.objects.filter(id=pk).update(qzone_id=qzone.uid)
                 qzone_name = qzone.name
     return HttpResponseRedirect('/account/bind/')
 
@@ -100,7 +100,7 @@ def handle_data(request):
 def cancel_qzone(request):
     global qzone_name
     LoginInfo.objects.filter(
-        id=int(request.session['login_db_id'])).update(qzone_id="")
+        id=request.session['login_db_id']).update(qzone_id="")
     qzone_name = ""
     return HttpResponseRedirect('/account/bind/')
 
@@ -108,7 +108,7 @@ def cancel_qzone(request):
 def cancel_weibo(request):
     global weibo_name
     LoginInfo.objects.filter(
-        id=int(request.session['login_db_id'])).update(weibo_id="")
+        id=request.session['login_db_id']).update(weibo_id="")
     weibo_name = ""
     return HttpResponseRedirect('/account/bind/')
 
@@ -116,13 +116,13 @@ def cancel_weibo(request):
 def cancel_douban(request):
     global douban_name
     LoginInfo.objects.filter(
-        id=int(request.session['login_db_id'])).update(douban_id="")
+        id=request.session['login_db_id']).update(douban_id="")
     douban_name = ""
     return HttpResponseRedirect('/account/bind/')
 
 
 def delete_account(request):
-    LoginInfo.objects.filter(id=int(request.session['login_db_id'])).delete()
+    LoginInfo.objects.filter(id=request.session['login_db_id']).delete()
     return HttpResponseRedirect('/auth/logout/')
 
 
@@ -132,7 +132,7 @@ def show_result(request):
     qzone_found = False
     remain_one = False
 
-    obj = LoginInfo.objects.filter(id=int(request.session['login_db_id']))
+    obj = LoginInfo.objects.filter(id=request.session['login_db_id'])
 
     if obj.weibo_id:
         weibo_found = True
