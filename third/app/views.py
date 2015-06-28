@@ -133,6 +133,7 @@ def show_result(request):
     remain_one = False
 
     obj = LoginInfo.objects.filter(id=request.session['login_db_id'])
+    obj = obj[0]
 
     if obj.weibo_id:
         weibo_found = True
