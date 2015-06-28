@@ -21,7 +21,9 @@ login_db_id = None
 
 
 def login(request):
-    if login_db_id is not None:
+    global login_db_id
+    login_db_id = request.session.get('login_db_id', '')
+    if login_db_id:
         return HttpResponseRedirect('/account/bind/')
     else:
         return render_to_response('home.html')
@@ -32,24 +34,17 @@ def handle_data(request):
     global douban_name
     global weibo_name
     global qzone_name
-      
-    # get code and state used for getting access taken
+
     if request.method == 'GET':
         code = request.GET.get('code', '')
         state = request.GET.get('state', '')
-    # if it is going to login
     if login_db_id is None:
-        # if user login using weibo
         if state == "weibo":
-            # use code(状态码) to access weibo uid
             weibo.get_access_token(code=code)
-            # whether or not the user is registered 
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
-            # if is not, create record into database
             if not lst:
                 new = LoginInfo(weibo_id=weibo.uid)
                 new.save()
-            # login_db_id used for recognizing which row of data(a user) login
                 login_db_id = new.id
             else:
                 login_db_id = lst[0].id
@@ -74,19 +69,16 @@ def handle_data(request):
             else:
                 login_db_id = lst[0].id
             qzone_name = qzone.name
-    # if user has login to the website, 
-    # and user want to bind another social account
+        request.session['login_db_id'] = login_db_id
     else:
-        # if user want to bind weibo
         if state == "weibo":
             weibo.get_access_token(code=code)
             lst = LoginInfo.objects.filter(weibo_id=weibo.uid)
-            # but weibo accout exist in the database, 
-            # which means another user has binded to this account
             if lst and lst[0].id != login_db_id:
                 return render_to_response('duplicate.html')
             else:
-                LoginInfo.objects.filter(id=login_db_id).update(weibo_id=weibo.uid)
+                LoginInfo.objects.filter(
+                    id=login_db_id).update(weibo_id=weibo.uid)
                 weibo_name = weibo.name
 
         elif state == "douban":
@@ -95,7 +87,8 @@ def handle_data(request):
             if lst and lst[0].id != login_db_id:
                 return render_to_response('duplicate.html')
             else:
-                LoginInfo.objects.filter(id=login_db_id).update(douban_id=douban.uid)
+                LoginInfo.objects.filter(
+                    id=login_db_id).update(douban_id=douban.uid)
                 douban_name = douban.name
         else:
             qzone.get_access_token(code=code)
@@ -103,7 +96,8 @@ def handle_data(request):
             if lst and lst[0].id != login_db_id:
                 return render_to_response('duplicate.html')
             else:
-                LoginInfo.objects.filter(id=login_db_id).update(qzone_id=qzone.uid)
+                LoginInfo.objects.filter(
+                    id=login_db_id).update(qzone_id=qzone.uid)
                 qzone_name = qzone.name
     return HttpResponseRedirect('/account/bind/')
 
@@ -174,11 +168,9 @@ def show_result(request):
 
 
 def logout(request):
-    global login_db_id
-
-    login_db_id = None
+    del request.session['login_db_id']
     douban_name = ""
     weibo_name = ""
     qzone_name = ""
 
-    return HttpResponseRedirect('/')    
+    return HttpResponseRedirect('/')
