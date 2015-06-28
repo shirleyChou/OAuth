@@ -135,13 +135,11 @@ def show_result(request):
     douban_found = False
     qzone_found = False
     remain_one = False
-
-    obj = LoginInfo.objects.filter(id=login_db_id)
-    if len(obj) == 0:
-        login_db_id == None
+    
+    if login_db_id is None:
         return HttpResponseRedirect('/')
     else:
-        obj = obj[0]
+        obj = LoginInfo.objects.filter(id=login_db_id)
         if obj.weibo_id:
             weibo_found = True
         if obj.douban_id:
