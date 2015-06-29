@@ -13,8 +13,8 @@ class WeiBo(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://api.weibo.com/oauth2/authorize'
-        self.client_id = '2792156407'
-        self.client_secret = '33a83c83bb6ab926ec0853e1ba139518'
+        self.client_id = '2699499178'
+        self.client_secret = '37b2c55e6cdbed4b9c35ad2b4abfe8b6'
         self.redirect_uri = 'https://vast-hamlet-2195.herokuapp.com/account/'
         self.access_token_url = 'https://api.weibo.com/oauth2/access_token'
         self.access_token = None
