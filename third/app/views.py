@@ -13,10 +13,6 @@ douban = DouBan()
 weibo = WeiBo()
 qzone = Qzone()
 
-douban_name = ""
-weibo_name = ""
-qzone_name = ""
-
 
 def login(request):
     pk = request.session.get('login_db_id', '')
@@ -27,10 +23,6 @@ def login(request):
 
 
 def handle_data(request):
-    global douban_name
-    global weibo_name
-    global qzone_name
-
     if request.method == 'GET':
         code = request.GET.get('code', '')
         state = request.GET.get('state', '')
@@ -45,7 +37,7 @@ def handle_data(request):
                 pk = new.id
             else:
                 pk = lst[0].id
-            weibo_name = weibo.name
+            request.session['weibo_name'] = weibo.name
         elif state == "douban":
             douban.get_access_token(code=code)
             lst = LoginInfo.objects.filter(douban_id=douban.uid)
@@ -55,7 +47,7 @@ def handle_data(request):
                 pk = new.id
             else:
                 pk = lst[0].id
-            douban_name = douban.name
+            request.session['douban_name'] = douban.name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
@@ -65,7 +57,7 @@ def handle_data(request):
                 pk = new.id
             else:
                 pk = lst[0].id
-            qzone_name = qzone.name
+            request.session['qzone_name'] = qzone.name
         request.session['login_db_id'] = pk
     else:
         if state == "weibo":
@@ -75,7 +67,7 @@ def handle_data(request):
                 return render_to_response('duplicate.html')
             else:
                 LoginInfo.objects.filter(id=pk).update(weibo_id=weibo.uid)
-                weibo_name = weibo.name
+                request.session['weibo_name'] = weibo.name
 
         elif state == "douban":
             douban.get_access_token(code=code)
@@ -85,7 +77,7 @@ def handle_data(request):
             else:
                 LoginInfo.objects.filter(
                     id=pk).update(douban_id=douban.uid)
-                douban_name = douban.name
+                request.session['douban_name'] = douban.name
         else:
             qzone.get_access_token(code=code)
             lst = LoginInfo.objects.filter(qzone_id=qzone.uid)
@@ -93,31 +85,28 @@ def handle_data(request):
                 return render_to_response('duplicate.html')
             else:
                 LoginInfo.objects.filter(id=pk).update(qzone_id=qzone.uid)
-                qzone_name = qzone.name
+                request.session['qzone_name'] = qzone.name
     return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_qzone(request):
-    global qzone_name
     LoginInfo.objects.filter(
         id=request.session['login_db_id']).update(qzone_id="")
-    qzone_name = ""
+    request.session['qzone_name'] = ''
     return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_weibo(request):
-    global weibo_name
     LoginInfo.objects.filter(
         id=request.session['login_db_id']).update(weibo_id="")
-    weibo_name = ""
+    request.session['weibo_name'] = ''
     return HttpResponseRedirect('/account/bind/')
 
 
 def cancel_douban(request):
-    global douban_name
     LoginInfo.objects.filter(
         id=request.session['login_db_id']).update(douban_id="")
-    douban_name = ""
+    request.session['douban_name'] = ''
     return HttpResponseRedirect('/account/bind/')
 
 
@@ -154,16 +143,16 @@ def show_result(request):
                        'douban_found': douban_found,
                        'qzone_found': qzone_found,
                        'remain_one': remain_one,
-                       'weibo_name': weibo_name,
-                       'douban_name': douban_name,
-                       'qzone_name': qzone_name}
+                       'weibo_name': request.session.get('weibo_name', ''),
+                       'douban_name': request.session.get('douban_name', ''),
+                       'qzone_name': request.session.get('qzone_name', '')}
     )
 
 
 def logout(request):
     del request.session['login_db_id']
-    douban_name = ""
-    weibo_name = ""
-    qzone_name = ""
+    del request.session['qzone_name']
+    del request.session['weibo_name']
+    del request.session['douban_name']
 
     return HttpResponseRedirect('/')
