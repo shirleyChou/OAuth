@@ -121,8 +121,15 @@ def show_result(request):
     qzone_found = False
     remain_one = False
 
-    obj = LoginInfo.objects.filter(id=request.session['login_db_id'])
-    obj = obj[0]
+    if request.session.get('login_db_id', ''):
+        obj = LoginInfo.objects.filter(id=request.session['login_db_id'])
+        if len(obj) == 0:
+            request.session['login_db_id'] = ''
+            return HttpResponseRedirect('/')
+        else:
+            obj = obj[0]
+    else:
+        return HttpResponseRedirect('/')
 
     if obj.weibo_id:
         weibo_found = True
@@ -139,15 +146,13 @@ def show_result(request):
         remain_one = True
 
     return render_to_response(
-        'index.html', 
-        {'weibo_found': weibo_found,
-         'douban_found': douban_found,
-         'qzone_found': qzone_found,
-         'remain_one': remain_one,
-         'weibo_name': obj.weibo_name if obj.weibo_name else '',
-         'douban_name': obj.douban_name if obj.douban_name else '',
-         'qzone_name': obj.qzone_name if obj.qzone_name else ''
-        }
+        'index.html', {'weibo_found': weibo_found,
+                       'douban_found': douban_found,
+                       'qzone_found': qzone_found,
+                       'remain_one': remain_one,
+                       'weibo_name': obj.weibo_name if obj.weibo_name else '',
+                       'douban_name': obj.douban_name if obj.douban_name else '',
+                       'qzone_name': obj.qzone_name if obj.qzone_name else ''}
     )
 
 
