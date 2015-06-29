@@ -12,9 +12,9 @@ class DouBan(OAuth2):
 
     def __init__(self):
         self.login_url = 'https://www.douban.com/service/auth2/auth'
-        self.client_id = '0d4104d89bed327c27c30e89d3c79774'
-        self.client_secret = 'f30e0dc1d5cbd5b3'
-        self.redirect_uri = 'https://sleepy-caverns-4864.herokuapp.com/account/'
+        self.client_id = '0e2cb973302b699d2a862c5990823cd7'
+        self.client_secret = '5a2a7988dcaee9ef'
+        self.redirect_uri = 'https://vast-hamlet-2195.herokuapp.com/account/'
         self.access_token_url = 'https://www.douban.com/service/auth2/token'
         self.douban_api_url = 'https://api.douban.com'
         self.uid = None

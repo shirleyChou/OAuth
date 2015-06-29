@@ -20,7 +20,7 @@ class Qzone(OAuth2):
         self.login_url = 'https://graph.qq.com/oauth2.0/authorize'
         self.client_id = '101224331'
         self.client_secret = '6df31a62152d5c9936f58899119915c7'
-        self.redirect_uri = 'http://sleepy-caverns-4864.herokuapp.com/account/'
+        self.redirect_uri = 'http://vast-hamlet-2195.herokuapp.com/account/'
         self.access_token_url = 'https://graph.qq.com/oauth2.0/token'
         self.openid_url = 'https://graph.qq.com/oauth2.0/me'
         self.access_token = None

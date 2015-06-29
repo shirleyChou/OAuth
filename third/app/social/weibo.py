@@ -15,7 +15,7 @@ class WeiBo(OAuth2):
         self.login_url = 'https://api.weibo.com/oauth2/authorize'
         self.client_id = '2792156407'
         self.client_secret = '33a83c83bb6ab926ec0853e1ba139518'
-        self.redirect_uri = 'https://sleepy-caverns-4864.herokuapp.com/account/'
+        self.redirect_uri = 'https://vast-hamlet-2195.herokuapp.com/account/'
         self.access_token_url = 'https://api.weibo.com/oauth2/access_token'
         self.access_token = None
         self.expires_in = None
