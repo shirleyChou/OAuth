@@ -108,11 +108,6 @@ def delete_account(request):
     return HttpResponseRedirect('/auth/logout/')
 
 def show_result(request):
-    weibo_found = False
-    douban_found = False
-    qzone_found = False
-    remain_one = False
-
     if request.session.get('login_db_id', ''):
         obj = LoginInfo.objects.filter(id=request.session['login_db_id'])
         if len(obj) == 0:
@@ -129,16 +124,11 @@ def show_result(request):
         if lst[i]:
             count += 1
 
-    if count == 1:
-        remain_one = True
-    else:
-        remain_one = False
-
     return render_to_response(
         'index.html', {'weibo_found': True if obj.weibo_id else False,
                        'douban_found': True if obj.douban_id else False,
                        'qzone_found': True if obj.qzone_id else False,
-                       'remain_one': remain_one,
+                       'remain_one': True if count == 1 else False,
                        'weibo_name': obj.weibo_name if obj.weibo_name else '',
                        'douban_name': obj.douban_name if obj.douban_name else '',
                        'qzone_name': obj.qzone_name if obj.qzone_name else ''}
